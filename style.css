@@ -12,10 +12,12 @@ html {
 header {
     position: absolute;
     top: 0;
-    width: 100%;
+    left: 0;
+    width: 100vw;
     text-align: center;
     padding: 1rem;
-    font-size: 2rem;
+    font-size: 3rem;
+    font-weight: bold;
 }
 
 .scorebox {
