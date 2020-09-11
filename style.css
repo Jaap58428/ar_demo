@@ -6,6 +6,16 @@
 
 html {
     font-size: 62.5%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    font-size: 2rem;
 }
 
 .scorebox {
