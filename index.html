@@ -17,24 +17,51 @@
   <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
 
   <script src="main.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 
+<!-- 
+
+  Every MARKER needs the following items (Unicorn as example)
+    - Pattern linked to marker to recoginze (url='markers/pattern-unicorn.patt')
+    - GLTF asset to place on it (src="./unicorn/scene.gltf")
+    - Configuration of the entity specific to the scene (scale='0.3 0.3 0.3' position='0 -0.5 0')
+    - General title to display in the scoreboard ("Unicorn")
+    - Custom case implementation of handleMarkerEvent AND notation scoreBoard in JS (unicornhandler)
+    - Div in the scoreboard with unique ID linked to the case implementation
+    - OPTIONAL: animation-mixer will run the GLTF embedded animation
+    
+ -->
+
 <body style='margin : 0px; overflow: hidden;'>
-  <a-scene embedded arjs selectCamera='true'>
+  <div id="scorebox" class="scorebox">
+    <div id="unicornScore">
+      <span>Unicorn</span>
+    </div>
+    <div id="giraffeScore">
+      <span>Giraffe</span>
+    </div>
+  </div>
+  <a-scene
+    vr-mode-ui="enabled: false;"
+    renderer="logarithmicDepthBuffer: true;"
+    embedded
+    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;" 
+    selectCamera='true'>
     <a-assets>
       <!-- Refferences to GLTF objects -->
-      <a-asset-item id="giraffe" src="./dr.long_leaf/scene.gltf"></a-asset-item>
-      <a-asset-item id="unicorn" src="./unicorn/scene.gltf"></a-asset-item>
+      <a-asset-item id="giraffeModel" src="./dr.long_leaf/scene.gltf"></a-asset-item>
+      <a-asset-item id="unicornModel" src="./unicorn/scene.gltf"></a-asset-item>
     </a-assets>
 
     <!-- Describe the marker you want the AR-Object to be attached to -->
-    <a-marker type='pattern' url='markers/pattern-unicorn.patt'>
+    <a-marker markerhandler id="unicornMarker" type='pattern' url='markers/pattern-unicorn.patt'>
       <!-- The object in question you want to display -->
-      <a-entity position='0 -0.5 0' gltf-model="#unicorn" scale='0.3 0.3 0.3' animation-mixer>
+      <a-entity position='0 -0.5 0' gltf-model="#unicornModel" scale='0.3 0.3 0.3' animation-mixer>
     </a-marker>
 
-    <a-marker type='pattern' url='markers/pattern-giraffe.patt'>
-      <a-entity position='0 1 0' id="giraffe" gltf-model="#giraffe" scale='0.01 0.01 0.01' animation="property: rotation; to: 0 360 0; dur: 10000; easing: linear; loop: true">
+    <a-marker markerhandler id="giraffeMarker" type='pattern' url='markers/pattern-giraffe.patt'>
+      <a-entity position='0 1 0' gltf-model="#giraffeModel" scale='0.01 0.01 0.01' animation="property: rotation; to: 0 360 0; dur: 10000; easing: linear; loop: true">
       <!-- <a-box position='0 0.5 0' material='opacity: 0.5;'></a-box> -->
     </a-marker>
 
